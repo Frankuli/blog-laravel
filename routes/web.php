@@ -12,10 +12,12 @@
 */
 
 //Route::get('/', 'PagesController@home');
+Auth::routes();
 Route::get('/', 'MessagesController@index');
 Route::get('/acDe', 'PagesController@acerca');
 Route::get('/post/{message}/ver','MessagesController@show');
 Route::get('/post/new', 'MessagesController@new')->middleware('auth');
 Route::post('/post/create','MessagesController@create');
+Route::get('/{username}','UserController@show');
 
-Auth::routes();
+
