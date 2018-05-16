@@ -10,11 +10,32 @@
                         <h6 class="text-muted text-lg-center">{{$user->username}}</h6>
                     </div>
                 </div>
+
                 <div class="row">
                     <div class="row">
+                        <div class="col-12">
+                            @if(Auth::check())
+                               {{-- @if(Auth::user()->isFollowing($user))--}}
+                                @if ($user->follows->contains(Auth::user()))
+                                    <form action="/{{$user->username}}/unfollow" method="post" class="form-group">
+                                        {{csrf_field()}}
+                                        <button class="btn btn-danger">DEJAR DE SEGUIR</button>
+                                    </form>
+                                @else
+                                    <form action="/{{$user->username}}/follow" method="post" class="form-group">
+                                        {{csrf_field()}}
+                                        <button type="submit" class="btn btn-danger">SEGUIR</button>
+                                    </form>
+                                @endif
+                            @endif
+                        </div>
+                    </div>
+                    <div class="row">
                         <div class="col-12 ">
-                            <h5>SEGUIDORES</h5>
-                            <a href="#" class="text-lg-center">{{count($user->followers)}}</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#followers">
+                                <h5>SEGUIDORES ({{$user->followers->count()}})</h5>
+                            </button>
+                            @include('user.userModal',['title'=>'SEGUIDORES', 'idModal'=>'followers','users'=>$user->followers]);
                             {{-- @forelse($user->followers as $follower)
                                  <div class="col-6">
                                      {{ $follower->name }}
@@ -26,8 +47,11 @@
                     </div>
                     <div class="row">
                         <div class="col-12">
-                            <h5>SIGUIENDO</h5>
-                            <a href="#" class="text-lg-center">{{count($user->follows)}}</a>
+                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#follows">
+                                <h5>SEGUIENDO ({{$user->follows->count()}})</h5>
+                            </button>
+                            @include('user.userModal',['title'=>'SEGUIENDO', 'idModal'=>'follows','users'=>$user->follows]);
+
                             {{-- @forelse($user->follows as $follow)
                                  <div class="col-6">
                                      {{ $follow->name }}
@@ -61,5 +85,4 @@
             </div>
         </div>
     </div>
-
 @endsection

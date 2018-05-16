@@ -18,6 +18,9 @@ Route::get('/acDe', 'PagesController@acerca');
 Route::get('/post/{message}/ver','MessagesController@show');
 Route::get('/post/new', 'MessagesController@new')->middleware('auth');
 Route::post('/post/create','MessagesController@create');
+Route::post('/{username}/follow', 'UserController@follow');
+Route::post('/{username}/unfollow', 'UserController@unfollow');
 Route::get('/{username}','UserController@show');
+
 
 
