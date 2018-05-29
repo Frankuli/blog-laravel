@@ -15,7 +15,6 @@ class AddCreatedAtIndexToTableMessages extends Migration
     {
         Schema::table('messages', function (Blueprint $table) {
             $table->index('created_at');
-
         });
     }
 

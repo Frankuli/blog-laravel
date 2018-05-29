@@ -82,6 +82,15 @@
                                 </button>
                             </div>
                         </div>
+
+                        <div class="form-group row mb-0">
+                            <div class="col-md-6 offset-4">
+                                <a href="/auth/facebook" CLASS="btn btn-primary">
+                                   INGRESA CON FACEBOOK
+                                </a>
+
+                            </div>
+                        </div>
                     </form>
                 </div>
             </div>
